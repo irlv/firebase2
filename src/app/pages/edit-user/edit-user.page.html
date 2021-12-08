@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>edit_User</ion-title>
-    <ion-button slot="end"><ion-icon name="exit-outline"></ion-icon></ion-button>
+    <ion-button slot="end"><ion-icon name="exit-outline" (click)="signOut()"></ion-icon></ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -15,7 +15,7 @@
            <mat-form-field class="example-full-width" >
              <mat-label style="color: dark-light;">Nombre</mat-label>
              <input matInput #usuarioCount placeholder="Nombre" type="text"
-             [(ngModel)]="user.nombre" (keyup)="onKeyUp($event)" name="nombre"
+             [(ngModel)]="user1.nombre" (keyup)="onKeyUp($event)" name="nombre"
              required>
              <mat-hint align="end">{{usuarioCount.value.length}}</mat-hint>
            
@@ -24,7 +24,7 @@
            <mat-form-field class="example-full-width" >
              <mat-label style="color: dark-light;">Apellido Paterno</mat-label>
              <input matInput #paternoCount placeholder="Apellido Paterno" type="text" 
-             [(ngModel)]="user.ape_Pat" (keyup)="onKeyUp($event)" name="ape_Pat"
+             [(ngModel)]="user1.ape_Pat" (keyup)="onKeyUp($event)" name="ape_Pat"
              required>
              <mat-hint align="end">{{paternoCount.value.length}}</mat-hint>
              
@@ -33,7 +33,7 @@
            <mat-form-field class="example-full-width" >
              <mat-label style="color: dark-light;">Apellido Materno</mat-label>
              <input matInput #maternoCount placeholder="Apellido Materno" type="text" 
-             [(ngModel)]="user.ape_Mat" (keyup)="onKeyUp($event)" name="ape_Mat"
+             [(ngModel)]="user1.ape_Mat" (keyup)="onKeyUp($event)" name="ape_Mat"
              required>
              <mat-hint align="end">{{maternoCount.value.length}}</mat-hint>
             
@@ -42,7 +42,7 @@
            <mat-form-field class="example-full-width" >
              <mat-label style="color:dark-light;">Correo Electronico</mat-label>
              <input matInput #emailCount placeholder="Correo Electronico" type="email"
-             [(ngModel)]="user.correo" (keyup)="onKeyEmail($event)" name="correo"
+             [(ngModel)]="user1.correo" (keyup)="onKeyEmail($event)" name="correo"
              required>
              <mat-hint align="end">{{emailCount.value.length}}</mat-hint>
              
@@ -51,7 +51,7 @@
            <mat-form-field class="example-full-width" >
              <mat-label style="color: dark-light;">Telefono</mat-label>
              <input matInput #telefonoCount placeholder="Telefono" type="text"
-             [(ngModel)]="user.telefono" (keyup)="onKeyTelefono($event)" name="NoTele"
+             [(ngModel)]="user1.NoTele" (keyup)="onKeyTelefono($event)" name="NoTele"
              onkeypress="if(this.value.length == 10 ) return false;"required>
               <mat-hint align="end">{{telefonoCount.value.length}}</mat-hint>
               

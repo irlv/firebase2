@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { AlertController  } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 export interface User{
   id?:string;
@@ -12,6 +13,8 @@ export interface User{
   ape_Mat:string;
   NoTele:string;
   nombre:string;
+  
+ 
 }
 
 @Component({
@@ -21,7 +24,7 @@ export interface User{
 })
 export class EditUserPage implements OnInit {
 
-  constructor(private dataService:DataService,private alertController:AlertController) { }
+  constructor(private dataService:DataService,private alertController:AlertController,private router:Router) { }
 
   user1 = {} as User;
   
@@ -47,8 +50,10 @@ export class EditUserPage implements OnInit {
 
   ngOnInit() {
     const idUserLogged = this.dataService.getUserUid();
+    
     this.dataService.getUserById(idUserLogged).subscribe(res => {
       this.user1 = res;
+      console.log(res);
     })
   }
 
@@ -61,7 +66,7 @@ export class EditUserPage implements OnInit {
     }
 
     let email = new RegExp("[a-zA-Z0-9.#$%&'*_-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$");
-    if(!email.test(this.user.correo)){
+    if(!email.test(this.user1.correo)){
       this.alertaContra = "invalido";
       this.user.verificacionEmail =false;
     }else{
@@ -84,7 +89,7 @@ export class EditUserPage implements OnInit {
     let usuarios = new RegExp("^[A-Za-z? ]+$");
    
     if(event.target.name=="nombre"){
-      if(!usuarios.test(this.user.nombre)){
+      if(!usuarios.test(this.user1.nombre)){
         this.alertaUsuario = "invalido";
         this.user.verificacionUsuario = false;
       }else{
@@ -94,7 +99,7 @@ export class EditUserPage implements OnInit {
       }
     }
     if(event.target.name=="ape_Pat"){
-        if(!usuarios.test(this.user.ape_Pat)){
+        if(!usuarios.test(this.user1.ape_Pat)){
           this.alertaPaterno = "invalido";
           this.user.verificacionPaterno = false;
         }else{
@@ -104,7 +109,7 @@ export class EditUserPage implements OnInit {
         }
     }
     if(event.target.name=="ape_Mat"){
-      if(!usuarios.test(this.user.ape_Mat)){
+      if(!usuarios.test(this.user1.ape_Mat)){
         this.alertaMaterno = "invalido";
         this.user.verificacionMaterno = false;
       }else{
@@ -124,7 +129,7 @@ export class EditUserPage implements OnInit {
   }
 
   let telefono = new RegExp("^[0-9]*$");
-  if(!telefono.test(this.user.NoTele)){
+  if(!telefono.test(this.user1.NoTele)){
       event.target.value = newValue.slice(0, -1);
       this.alertaTelefono = "invalido";
       this.user.verificacionTelefono =false;
@@ -140,13 +145,13 @@ export class EditUserPage implements OnInit {
  async guardar(_form: NgForm){
   
   const idUserLogged = this.dataService.getUserUid();
-  this.dataService.update(_form.value, idUserLogged).then( (res) =>{
-  //   const alert = await this.alertController.create({
-  //     header : 'Exito!!',
-  //     message: 'Editado Correctamento',
-  //     buttons : ['OK']
-  //  });
-  //  await alert.present();
+  this.dataService.update(_form.value, idUserLogged).then( async (res) =>{
+    const alert = await this.alertController.create({
+      header : 'Exito!!',
+      message: 'Editado Correctamento',
+      buttons : ['OK']
+   });
+   await alert.present();
    
   },async (err) =>{
     console.log(err)
@@ -154,5 +159,11 @@ export class EditUserPage implements OnInit {
   
   //console.log(this.user)
  } 
+
+ signOut() {
+  this.dataService.Logout().then(() => {
+    this.router.navigate(['/home']);
+  });
+}
 
 }

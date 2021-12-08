@@ -1,14 +1,22 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-carousel',
   templateUrl: './carousel.page.html',
   styleUrls: ['./carousel.page.scss'],
 })
-export class CarouselPage implements OnInit {
 
-  constructor() { }
+export class CarouselPage implements OnInit {
+  img=[];
+
+  constructor(private dataService:DataService) { 
+    this.dataService.getUrl().subscribe(res =>{
+      this.img = res;
+      console.log(res);
+    })
+  }
   @ViewChild('slides', { read: true, static: false }) ionSlides: IonSlides;
 
   ngOnInit() {

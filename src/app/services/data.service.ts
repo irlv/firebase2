@@ -4,7 +4,7 @@ import { Auth, createUserWithEmailAndPassword,sendEmailVerification,
   import { Observable} from 'rxjs';
 
 
-  import { Firestore, docData, setDoc, doc, updateDoc, collection, where, onSnapshot }
+  import { Firestore, docData, setDoc, doc, updateDoc, collection, where, onSnapshot,collectionData }
    from '@angular/fire/firestore';
    export interface User{
     id?:string;
@@ -15,6 +15,11 @@ import { Auth, createUserWithEmailAndPassword,sendEmailVerification,
     ape_Mat:string;
     NoTele:string;
     nombre:string;
+  }
+
+  export interface Carousel {
+    id?: string;
+    url: string;
   }
 
 @Injectable({
@@ -49,8 +54,9 @@ export class DataService {
   }
 
   async update(user: User, id): Promise<any> {
+    console.log(user)
     const userRef = doc(this.fire, `notes/${id}`);
-    return await updateDoc(userRef, { nombre: user.nombre, ape_Pat: user.ape_Pat, ape_Mat: user.ape_Mat, usuario: user.usuario, NoTele: user.NoTele })
+    return await updateDoc(userRef, { nombre: user.nombre, ape_Pat: user.ape_Pat, ape_Mat: user.ape_Mat, NoTele: user.NoTele })
   }
 
   getUserUid() {
@@ -61,4 +67,15 @@ export class DataService {
     const userDocRef = doc(this.fire, `notes/${id}`);
     return docData(userDocRef, { idField: 'id' }) as Observable<User>
   }
+
+  async EnviarResetPassword(email){
+    return await sendPasswordResetEmail(this.auth, email);
+  }
+
+  getUrl(){
+    const ref = collection(this.fire, 'carrusel');
+    return collectionData(ref, {idField: 'id'}) as Observable<Carousel[]>;
+  }
+
+  
 }
