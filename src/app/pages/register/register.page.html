@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"
+      text="Regresar"
+      color="light">
+      </ion-back-button>
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+<ion-content style="text-align: center !important;">
+  <ion-car >
+    <form class="example-form" #formUser="ngForm">
+      <br>
+      <br>
+      <ion-row>
+        <ion-col>
+          
+          <mat-form-field class="example-full-width" >
+            <mat-label style="color: white;">Usuario</mat-label>
+            <input type="text" #usuarioCount matInput name="usuario" [(ngModel)]="user.usuario" 
+            maxlength="30"
+            minlength="8"
+            placeholder="Usuario" (keyup)="onKeyUp($event)"
+            onkeypress="if(this.value.length==30) return false;"
+            required>
+            <mat-hint aling="end">{{usuarioCount.value.length}} /30</mat-hint>
+          </mat-form-field>
+          <br>
+          <br>
+          <br>
+          <br>
+          <mat-form-field class="example-full-width" >
+            <mat-label style="color: white;">Correo Electronico</mat-label>
+            <input type="email" #emailCount matInput name="correo"
+            placeholder="Correo Electronico"
+            [(ngModel)]="user.correo" 
+            (keyup)="onKeyCorreo($event)"
+            required>
+            <mat-hint aling="end">{{emailCount.value.length}}</mat-hint>
+          </mat-form-field>
+          <br>
+          <br>
+          <br>
+          <br>
+  
+          <mat-form-field class="example-full-width" >
+            <mat-label style="color: white;">Contraseña</mat-label>
+            <input type="password" #contraCount matInput name="contrasena" [(ngModel)]="user.contrasena" 
+            maxlength="20"
+            minlength="8"
+            placeholder="Contraseña" (keyup)="onKeyPassword($event)"
+            onkeypress="if(this.value.length==20) return false;"
+            required>
+            <mat-hint aling="end">{{contraCount.value.length}} /20</mat-hint>
+          </mat-form-field>
+          <br>
+          <br>
+          <br>
+          <br>
+  
+          <mat-form-field class="example-full-width" >
+            <mat-label style="color: white;">Contraseña</mat-label>
+            <input type="password" #contraVeriCount matInput name="contrasenaVerif" [(ngModel)]="user.contrasenaVerif" 
+            maxlength="20"
+            minlength="8"
+            placeholder="Contraseña" (keyup)="onKeyPassword($event)"
+            onkeypress="if(this.value.length==20) return false;"
+            required>
+            <mat-hint aling="end">{{contraVeriCount.value.length}} /20</mat-hint>
+          </mat-form-field>
+  
+          <br><br>
+          <br>
+          <br>
+          <br>
+          <ion-button  (click)="guardar(formUser) " [disabled]=" user.verificacionEmail==false ||
+          user.verificacionUsuario==false || user.verificacionContra == false || user.verificacionContraVefi==false">Guardar</ion-button>
+  
+        </ion-col>
+      </ion-row>
+    </form>
+
+  </ion-car>
+ 
+</ion-content>

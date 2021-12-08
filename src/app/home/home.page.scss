@@ -1,0 +1,21 @@
+ion-toolbar{
+  --background: var(--ion-color-mycolor);
+  
+}
+ion-card{
+  
+  --background: var( --ion-color-login);
+  opacity:0.8;
+}
+ion-content{
+  --background: linear-gradient(#4786ef, #f4f5f8);
+}
+
+ion-button{
+  --background: linear-gradient(#a6c6ff, #0040ff);
+}
+
+mat-form-field,ion-label{
+  color: black;
+}
+

@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>edit_User</ion-title>
+    <ion-button slot="end"><ion-icon name="exit-outline"></ion-icon></ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  style="text-align: center !important; color: ios body;">
+
+  <ion-card>
+    <form action="" #formUser="ngForm">
+      <ion-row>
+         <ion-col>
+          <br>
+           <mat-form-field class="example-full-width" >
+             <mat-label style="color: dark-light;">Nombre</mat-label>
+             <input matInput #usuarioCount placeholder="Nombre" type="text"
+             [(ngModel)]="user.nombre" (keyup)="onKeyUp($event)" name="nombre"
+             required>
+             <mat-hint align="end">{{usuarioCount.value.length}}</mat-hint>
+           
+           </mat-form-field> <br><br>
+         
+           <mat-form-field class="example-full-width" >
+             <mat-label style="color: dark-light;">Apellido Paterno</mat-label>
+             <input matInput #paternoCount placeholder="Apellido Paterno" type="text" 
+             [(ngModel)]="user.ape_Pat" (keyup)="onKeyUp($event)" name="ape_Pat"
+             required>
+             <mat-hint align="end">{{paternoCount.value.length}}</mat-hint>
+             
+           </mat-form-field><br><br>
+         
+           <mat-form-field class="example-full-width" >
+             <mat-label style="color: dark-light;">Apellido Materno</mat-label>
+             <input matInput #maternoCount placeholder="Apellido Materno" type="text" 
+             [(ngModel)]="user.ape_Mat" (keyup)="onKeyUp($event)" name="ape_Mat"
+             required>
+             <mat-hint align="end">{{maternoCount.value.length}}</mat-hint>
+            
+           </mat-form-field><br><br>
+         
+           <mat-form-field class="example-full-width" >
+             <mat-label style="color:dark-light;">Correo Electronico</mat-label>
+             <input matInput #emailCount placeholder="Correo Electronico" type="email"
+             [(ngModel)]="user.correo" (keyup)="onKeyEmail($event)" name="correo"
+             required>
+             <mat-hint align="end">{{emailCount.value.length}}</mat-hint>
+             
+           </mat-form-field><br><br>
+         
+           <mat-form-field class="example-full-width" >
+             <mat-label style="color: dark-light;">Telefono</mat-label>
+             <input matInput #telefonoCount placeholder="Telefono" type="text"
+             [(ngModel)]="user.telefono" (keyup)="onKeyTelefono($event)" name="NoTele"
+             onkeypress="if(this.value.length == 10 ) return false;"required>
+              <mat-hint align="end">{{telefonoCount.value.length}}</mat-hint>
+              
+           </mat-form-field> 
+           <br><br>
+
+           <ion-button  (click)="guardar(formUser)"  
+          >
+            Guardar
+          </ion-button>
+ 
+         </ion-col>
+      </ion-row>
+   </form>
+  </ion-card>
+
+</ion-content>

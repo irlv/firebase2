@@ -1,0 +1,71 @@
+
+
+<ion-content style="text-align:center !important;" color class="ion-no-border" >
+  <ion-card style="height: auto;  border: 30px; " >
+    <form class="example-form" #formUser="ngForm">
+      <ion-row>
+        
+        <ion-col>
+          <ion-avatar style=" margin: 15px auto 0;">
+            <img style="text-align: center;" src="data:image/jpeg;base64,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" alt="">
+          </ion-avatar>
+          <br>
+
+          <br><br>
+           <mat-form-field class="example-full-width">
+           <mat-label style="color: dark-light;">Correo</mat-label>
+            <input type="text" #usarioCount  matInput name="correo" [(ngModel)]="user.correo" 
+            (keyup)="onKeyCorreo($event)"
+            maxlength="30"
+            minlength="8"
+            placeholder="Usuario" 
+            onkeypress="if(this.value.length==30) return false;"
+            required>
+            <mat-hint aling="end">{{usarioCount .value.length}} /30</mat-hint>
+          </mat-form-field>
+          <br>
+          <br>
+
+
+          <br>
+         <mat-form-field class="example-full-width">
+            <mat-label style="color: dark-light;">Contraseña</mat-label>
+            <input type="password" #contraCount matInput name="contrasena" [(ngModel)]="user.contrasena" 
+            maxlength="30"
+            (keyup)="onKeyContra($event)"
+            placeholder="Contraseña" 
+            onkeypress="if(this.value.length==20) return false;"
+            required>
+            <mat-hint aling="end">{{contraCount.value.length}} /20</mat-hint>
+             <mat-hint style="color: white;font-size: 12px;">{{alertaPassword}}</mat-hint>
+          </mat-form-field>
+          <br>
+          <br>
+          <br>
+          <ion-button (click)="onSubmit(formUser)"[disabled]=" user.verificacionContra==false">
+            iniciar
+          </ion-button>
+          <br>
+          <br>
+          <br>
+          <ion-button routerLink="/register">Registro</ion-button>
+          <br>
+          <br>
+          <ion-text>
+            <ion-label><br>
+              <a href="/recuperacion-correo">Olvide Contraseña </a><br>
+        
+            </ion-label>
+          </ion-text>
+    
+  
+  
+        </ion-col>
+  
+  
+      </ion-row>
+    </form>
+    
+  </ion-card>
+ 
+</ion-content>
