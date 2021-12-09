@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PassdataService } from 'src/app/services/passdata.service';
 import { BarcodeScanner,BarcodeScannerOptions} from '@ionic-native/barcode-scanner/ngx';
+import { DataService } from 'src/app/services/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -16,7 +18,7 @@ export class ProductsPage implements OnInit {
   
   show=false;
 
-  constructor(private passdata : PassdataService,private barcodeScanner: BarcodeScanner,) { }
+  constructor(private passdata : PassdataService,private barcodeScanner: BarcodeScanner,private dataService:DataService,private router:Router) { }
 
   ngOnInit() {
     this.passdata.disparadorData.subscribe( data =>{
@@ -46,6 +48,13 @@ export class ProductsPage implements OnInit {
     }).catch(err => {
       alert("Error")
     });
+  }
+
+  signOut() {
+    this.dataService.Logout().then(() => {
+      this.router.navigateByUrl('/', {replaceUrl: true});
+    });
+    
   }
 
 

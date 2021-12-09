@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
+import { AlertController  } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-home',
@@ -19,7 +21,7 @@ export class HomePage {
   }
 
 
-  constructor(private router:Router, private dataService:DataService) {}
+  constructor(private router:Router, private dataService:DataService,private alertController:AlertController) {}
 
   onKeyUp(event: any){
     let newValue = event.target.value;
@@ -86,7 +88,7 @@ export class HomePage {
       alert("No cumple llena bien los Datos")
       
     }else{
-      alert(this.user.usario + ' : ' + this.user.contrasena)
+      //alert(this.user.usario + ' : ' + this.user.contrasena)
       console.log(_form.value)
      this.dataService.Login(_form.value).then((res)=>{
        if(this.dataService.userVerifiedMail()){
@@ -95,7 +97,15 @@ export class HomePage {
         this.dataService.sendEmailToVerification();
         this.dataService.Logout();
        }
-     })
+     },async (err) => {
+      const alert = await this.alertController.create({
+        header: 'Alguno de sus datos son incorrectos' ,
+        message: err.message,
+        buttons: ['OK'],
+      });
+      await alert.present();
+
+    })
      
       
     }

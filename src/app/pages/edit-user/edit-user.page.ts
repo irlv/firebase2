@@ -162,7 +162,7 @@ export class EditUserPage implements OnInit {
 
  signOut() {
   this.dataService.Logout().then(() => {
-    this.router.navigate(['/home']);
+    this.router.navigateByUrl('/', {replaceUrl: true});
   });
 }
 

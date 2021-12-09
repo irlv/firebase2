@@ -95,6 +95,12 @@ export class CarouselPage implements OnInit {
     slides.startAutoplay();
   }
 
+  signOut() {
+    this.dataService.Logout().then(() => {
+      this.router.navigateByUrl('/', {replaceUrl: true});
+    });
+    
+  }
   
 
   openScanner(){
@@ -117,12 +123,15 @@ export class CarouselPage implements OnInit {
       // this.show = true;
 
       this.passdata.disparadorData.emit(this.dataQr)
-      this.router.navigateByUrl('/tabs/barcode', {replaceUrl: true});
+      this.router.navigateByUrl('/tabs/products', {replaceUrl: true});
     }
     ).catch(err => {
       alert("Algio salio mal")
     });
 
+    
+
   }
+  
 
 }
