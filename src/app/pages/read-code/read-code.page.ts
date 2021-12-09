@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PassdataService } from 'src/app/services/passdata.service';
-import { BarcodeScanner, BarcodeScannerOptions } from '@awesome-cordova-plugins/barcode-scanner/ngx';
+import { BarcodeScanner,BarcodeScannerOptions} from '@ionic-native/barcode-scanner/ngx';
 
 @Component({
   selector: 'app-read-code',
