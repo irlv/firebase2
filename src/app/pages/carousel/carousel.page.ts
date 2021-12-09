@@ -1,6 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
+import { PassdataService } from 'src/app/services/passdata.service';
+import { BarcodeScanner,BarcodeScannerOptions} from '@ionic-native/barcode-scanner/ngx';
+import { Router } from '@angular/router';
+import { Alert } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-carousel',
@@ -10,8 +14,14 @@ import { DataService } from 'src/app/services/data.service';
 
 export class CarouselPage implements OnInit {
   img=[];
+  @Input() dataQr={
+    url:'',
+    name:'',
+  }
 
-  constructor(private dataService:DataService) { 
+  show=false;
+  constructor(private dataService:DataService,
+    private barcodeScanner: BarcodeScanner,private passdata : PassdataService,private router:Router) { 
     this.dataService.getUrl().subscribe(res =>{
       this.img = res;
       console.log(res);
@@ -83,6 +93,36 @@ export class CarouselPage implements OnInit {
 
   slidesDidLoad(slides: IonSlides) {
     slides.startAutoplay();
+  }
+
+  
+
+  openScanner(){
+    const options: BarcodeScannerOptions = {
+      preferFrontCamera: false,
+      showFlipCameraButton: true,
+      showTorchButton: true,
+      torchOn: false,
+      prompt: 'Place a barcode inside the scan area',
+      resultDisplayDuration: 500,
+      formats: 'EAN_13,EAN_8,QR_CODE,PDF_417 ',
+      orientation: 'portrait',
+    };
+    this.barcodeScanner.scan(options).then(barcodeData => {
+      const dataSplit = ''+barcodeData["text"];
+      const myArray = dataSplit.split(',');
+      this.dataQr.url = myArray[0];
+      this.dataQr.name = myArray[1];
+
+      // this.show = true;
+
+      this.passdata.disparadorData.emit(this.dataQr)
+      this.router.navigateByUrl('/tabs/barcode', {replaceUrl: true});
+    }
+    ).catch(err => {
+      alert("Algio salio mal")
+    });
+
   }
 
 }
